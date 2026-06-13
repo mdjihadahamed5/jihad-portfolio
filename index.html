@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jihad | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Variables - থিম কালার */
+        :root {
+            --bg-color: #f8f9fa;
+            --card-bg: #fff;
+            --text-color: #444;
+            --text-dark: #222;
+            --text-muted: #666;
+            --shadow: rgba(0,0,0,0.05);
+            --border-color: rgba(0, 122, 204, 0.1);
+            --badge-bg: #f1f5f9;
+            --glow-color: rgba(0, 122, 204, 0.2);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0f1015;
+            --card-bg: #161822;
+            --text-color: #cbd5e1;
+            --text-dark: #ffffff;
+            --text-muted: #94a3b8;
+            --shadow: rgba(0, 0, 0, 0.4);
+            --border-color: rgba(0, 122, 204, 0.25);
+            --badge-bg: #1e2235;
+            --glow-color: rgba(0, 122, 204, 0.6);
+        }
+
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Hind Siliguri', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- Scroll Reveal Animation Styles --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navbar */
+        header {
+            background: var(--card-bg);
+            padding: 18px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px var(--shadow);
+            position: relative; 
+            width: 100%;
+            z-index: 100;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #007acc;
+            letter-spacing: 0.5px;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        nav a {
+            margin-left: 24px;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #007acc;
+        }
+
+        /* Dark Mode Button */
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 19px;
+            cursor: pointer;
+            margin-left: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .theme-toggle:hover {
+            background: var(--bg-color);
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 80px 10% 90px 10%; 
+            background: var(--card-bg);
+        }
+        .hero-text {
+            flex: 1;
+            padding-right: 60px;
+        }
+        .hero-text h1 {
+            font-size: 44px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+        }
+        .hero-text h1 span {
+            color: #007acc;
+        }
+        
+        .typing-container {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            min-height: 54px;
+        }
+        .typing-text {
+            border-right: 2px solid #007acc;
+            white-space: pre-wrap;
+            animation: blink 0.75s step-end infinite;
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: #007acc; }
+        }
+
+        .hero-img {
+            flex: 1;
+            text-align: right;
+        }
+        .hero-img img {
+            width: 290px;
+            height: 290px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid #007acc;
+            box-shadow: 0 15px 30px var(--shadow);
+        }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 45px;
+            position: relative;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+        }
+        .section-title::after {
+            content: '';
+            width: 45px;
+            height: 4px;
+            background: #007acc;
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Social Connect Section */
+        .social-connect {
+            padding: 50px 10% 30px 10%;
+            background: var(--bg-color);
+            text-align: center;
+        }
+        .social-connect p {
+            font-size: 16px;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .mid-social-links {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+        }
+        .mid-social-links a {
+            background: var(--card-bg);
+            color: #007acc;
+            width: 48px; 
+            height: 48px;
+            border-radius: 50%; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px; 
+            box-shadow: 0 4px 10px var(--shadow);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid var(--border-color);
+        }
+        .mid-social-links a:hover {
+            background: #007acc;
+            color: #fff;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px var(--glow-color);
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 50px 10% 90px 10%; 
+            background: var(--card-bg);
+        }
+        .skills-container {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        .skill-badge {
+            background: var(--badge-bg);
+            color: #007acc;
+            padding: 11px 22px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        .skill-badge:hover {
+            background: #007acc;
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px var(--glow-color);
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 90px 10%;
+        }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px var(--shadow);
+            border: 1px solid transparent;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--border-color);
+            box-shadow: 0 12px 24px var(--shadow), 0 0 15px var(--glow-color);
+        }
+        .project-card h3 {
+            margin-bottom: 12px;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        .project-card p {
+            color: var(--text-muted);
+            font-size: 14.5px;
+            margin-bottom: 25px;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 90px 10%;
+            background: var(--card-bg);
+            text-align: center;
+        }
+        .contact-p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+        }
+        .contact-info {
+            max-width: 420px;
+            margin: 0 auto 35px auto;
+            text-align: left;
+            background: var(--bg-color);
+            padding: 24px;
+            border-radius: 10px;
+            border-left: 4px solid #007acc;
+            box-shadow: 0 4px 10px var(--shadow);
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 18px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+        .contact-item i {
+            font-size: 20px;
+            width: 35px;
+            color: #007acc;
+        }
+        .contact-item a:hover {
+            color: #007acc;
+            text-decoration: underline;
+        }
+
+        /* Button Style */
+        .btn {
+            display: inline-block;
+            background: #007acc;
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 15px;
+            box-shadow: 0 4px 10px var(--glow-color);
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: #005999;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px var(--glow-color);
+        }
+        .btn i {
+            margin-right: 8px;
+        }
+
+        /* Footer */
+        footer {
+            background: #090a0f;
+            color: #fff;
+            text-align: center;
+            padding: 45px 20px;
+            font-size: 14px;
+        }
+        .social-links {
+            margin-bottom: 22px;
+        }
+        .social-links a {
+            margin: 0 14px;
+            color: #888;
+            font-size: 22px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .social-links a:hover {
+            color: #007acc;
+            transform: scale(1.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding: 50px 5%;
+            }
+            .hero-text {
+                padding-right: 0;
+                margin-top: 35px;
+            }
+            .hero-text h1 {
+                font-size: 34px;
+            }
+            header {
+                padding: 20px 5%;
+                flex-direction: column;
+                gap: 15px;
+            }
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav a {
+                margin: 5px 12px;
+                font-size: 14px;
+            }
+            .theme-toggle {
+                margin-left: 12px;
+                margin-top: 2px;
+            }
+            .projects, .skills, .contact, .social-connect {
+                padding: 50px 5%;
+            }
+            .hero-img img {
+                width: 240px;
+                height: 240px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Jihad.dev</div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+            <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </nav>
+    </header>
+
+    <section class="hero" id="about">
+        <div class="hero-text">
+            <h1>Hi, I'm <span>Jihad</span></h1>
+            <div class="typing-container">
+                <span class="typing-text" id="animatedText"></span>
+            </div>
+            <a href="https://linkedin.com/in/YOUR_USERNAME" target="_blank" class="btn"><i class="fab fa-linkedin"></i>Connect on LinkedIn</a>
+        </div>
+        <div class="hero-img">
+            <img src="https://github.com/user-attachments/assets/f7d8db53-85fa-4def-9cc8-91a6e59a39b6" alt="Jihad">
+        </div>
+    </section>
+
+    <section class="social-connect reveal">
+        <p><i class="fas fa-link" style="color: #007acc; margin-right: 5px;"></i> Connect with Me on Social Media:</p>
+        <div class="mid-social-links">
+            <a href="https://github.com/YOUR_GITHUB" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://facebook.com/YOUR_FACEBOOK" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="https://instagram.com/YOUR_INSTAGRAM" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/in/YOUR_USERNAME" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+        </div>
+    </section>
+
+    <section class="skills reveal" id="skills">
+        <h2 class="section-title">My Skills</h2>
+        <div class="skills-container">
+            <span class="skill-badge">Python</span>
+            <span class="skill-badge">Cybersecurity & Pentesting</span>
+            <span class="skill-badge">Linux / Termux Expert</span>
+            <span class="skill-badge">HTML5 & CSS3</span>
+            <span class="skill-badge">JavaScript</span>
+            <span class="skill-badge">Git & GitHub</span>
+        </div>
+    </section>
+
+    <section class="projects reveal" id="projects">
+        <h2 class="section-title">My Projects</h2>
+        <div class="project-grid">
+            
+            <div class="project-card">
+                <h3>VANGUARD X</h3>
+                <p>একটি ইন্টারন্যাশনাল IT কোম্পানি যা Cyber Security, Penetration Testing এবং Web Development সার্ভিস প্রদান করে। এটি একটি global tech solution platform.</p>
+                <a href="https://mdjihadahamed5.github.io/vanguardx-web/" target="_blank" class="btn">View Project</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Fast Kart</h3>
+                <p>Modern e-commerce platform যেখানে clothes, medicine, electronics সহ বিভিন্ন প্রোডাক্ট সহজে কেনা যায়।</p>
+                <a href="https://loquacious-strudel-38a1b2.netlify.app/" target="_blank" class="btn">View Project</a>
+            </div>
+
+            <div class="project-card">
+                <h3>ClientFinder</h3>
+                <p>ফ্রিল্যান্সারদের জন্য স্মার্ট প্ল্যাটফর্ম, যা Fiverr, Upwork সহ বিভিন্ন marketplace থেকে ক্লায়েন্ট খুঁজে পেতে সাহায্য করে।</p>
+                <a href="https://stupendous-elf-719f96.netlify.app/" target="_blank" class="btn">View Project</a>
+            </div>
+
+            <div class="project-card">
+                <h3>AegisX</h3>
+                <p>একটি mobile-based earning tool যা beginners-দের জন্য ডিজাইন করা, Termux ব্যবহার করে freelancing income generate করা যায়।</p>
+                <a href="https://gleaming-seahorse-53810f.netlify.app/" target="_blank" class="btn">View Project</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Our Little Love</h3>
+                <p>একটি romantic proposal website যা ভালোবাসা প্রকাশের জন্য তৈরি করা হয়েছে। একটি সুন্দর ডিজিটাল লাভ স্টোরি।</p>
+                <a href="https://demo-ourlittlelove.com" target="_blank" class="btn">View Project</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Vulnerability Scanner</h3>
+                <p>এটি একটি অটোমেটেড সিকিউরিটি টুল যা ওয়েবসাইট এবং সার্ভারের সাধারণ বাগ বা ত্রুটিগুলো স্ক্যান করে বের করতে পারে।</p>
+                <a href="https://yourprojectlink1.com" target="_blank" class="btn">View Project</a>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="contact reveal" id="contact">
+        <h2 class="section-title">📋 Contact Section</h2>
+        <p class="contact-p">আপনার কোনো প্রজেক্ট বা আইডিয়া নিয়ে আলোচনার জন্য সরাসরি আমার সাথে যোগাযোগ করতে পারেন।</p>
+        
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i> 
+                <span>Email: <a href="mailto:mdjihadahamed50@gmail.com">mdjihadahamed50@gmail.com</a></span>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-telegram"></i> 
+                <span>Telegram: <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank">Send Message</a></span>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-whatsapp"></i> 
+                <span>WhatsApp: <a href="https://wa.me/8801727156368" target="_blank">+8801727156368</a></span>
+            </div>
+        </div>
+
+        <a href="https://wa.me/8801727156368" target="_blank" class="btn"><i class="fab fa-whatsapp"></i>Send Message</a>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/YOUR_GITHUB" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://facebook.com/YOUR_FACEBOOK" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="https://instagram.com/YOUR_INSTAGRAM" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/in/YOUR_USERNAME" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p>&copy; 2026 Jihad. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // --- Dark & Light Mode Logic ---
+        const themeToggle = document.getElementById('themeToggle');
+        const icon = themeToggle.querySelector('i');
+
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'dark') {
+                icon.classList.replace('fa-moon', 'fa-sun');
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            let theme = document.documentElement.getAttribute('data-theme');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                icon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            }
+        });
+
+        // --- Typing Effect Logic ---
+        const textElement = document.getElementById('animatedText');
+        const textToType = "আমি একজন সফটওয়্যার ডেভেলপার এবং সাইবার সিকিউরিটি এনথুসিয়াস্ট। মোবাইল ও ওয়েব এনভায়রনমেন্ট নিয়ে কাজ করতে আমি পছন্দ করি। নতুন নতুন আইডিয়া কোডিংয়ের মাধ্যমে বাস্তবে রূপ দেওয়া আমার শখ।";
+        let index = 0;
+
+        function typeEffect() {
+            if (index < textToType.length) {
+                textElement.textContent += textToType.charAt(index);
+                index++;
+                setTimeout(typeEffect, 45); 
+            } else {
+                textElement.style.borderRight = "none"; 
+            }
+        }
+
+        // --- Scroll Reveal Animation Logic ---
+        function revealSections() {
+            const reveals = document.querySelectorAll('.reveal');
+            const windowHeight = window.innerHeight;
+            const revealPoint = 100; // কতটুকু স্ক্রল করলে অ্যানিমেশন ফায়ার হবে
+
+            reveals.forEach(reveal => {
+                const revealTop = reveal.getBoundingClientRect().top;
+                if (revealTop < windowHeight - revealPoint) {
+                    reveal.classList.add('active');
+                }
+            });
+        }
+
+        // পেজ লোড হওয়ার পর ইনিশিয়াল রান
+        window.addEventListener('DOMContentLoaded', () => {
+            typeEffect();
+            revealSections();
+        });
+
+        // স্ক্রল করার সময় রান হবে
+        window.addEventListener('scroll', revealSections);
+    </script>
+
+</body>
+</html>
